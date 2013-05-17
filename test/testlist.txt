@@ -1,0 +1,2 @@
+cspack/models/packagemanifest-tests.js
+cspack/cspack-tests.js

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="{{serviceName}}" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">{{#workerRoles}}
+  <WorkerRole name="{{name}}">
+    <LocalResources>
+      <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
+    </LocalResources>
+    <ConfigurationSettings />
+    <Endpoints>
+      <InputEndpoint name="HttpIn" protocol="tcp" port="80" localPort="80" />
+    </Endpoints>
+    <Certificates />
+  </WorkerRole>{{/workerRoles}}
+</ServiceDefinition>

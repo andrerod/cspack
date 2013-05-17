@@ -1,6 +1,5 @@
-#!/usr/bin/env node
 /**
-* Copyright (c) Microsoft.  All rights reserved.
+* Copyright 2012 Microsoft Corporation
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -14,13 +13,20 @@
 * limitations under the License.
 */
 
-var Constants = {
-  PackageFile: 'package.xml',
+var PackageManifest = require('../../../lib/cspack/models/packagemanifest');
 
-  RoleTypes: {
-    Worker: 'worker',
-    Web: 'web'
-  }
-};
+describe('packagemanifest', function(){
+  describe('generate', function () {
+    it('should work with no data', function(done) {
+      console.log('hi there');
 
-module.exports = Constants;
+      var packageManifest = new PackageManifest();
+
+      console.log(packageManifest);
+      var result = packageManifest.generate();
+      console.log(result);
+
+      done();
+    });
+  });
+});
