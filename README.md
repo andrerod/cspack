@@ -1,4 +1,4 @@
-node-opc
+CsPack
 ========
 
-Open Package Conventions Library for node.js
+CsPack Library for node.js

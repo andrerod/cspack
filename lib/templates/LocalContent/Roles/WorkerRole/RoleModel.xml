@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RoleModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="WorkerRole1" version="1.8.31004.1351" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <Startup>
+    <Task commandLine="setup_worker.cmd &gt; log.txt" executionContext="elevated" relativePath="approot\">
+      <Environment>
+        <Variable name="EMULATED">
+          <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+        </Variable>
+        <Variable name="RUNTIMEID" value="node" />
+        <Variable name="RUNTIMEURL" value="http://nodertncu.blob.core.windows.net/node/0.6.20.exe" />
+      </Environment>
+    </Task>
+  </Startup>
+  <Runtime protocolVersion="2011-03-08">
+    <Environment>
+      <Variable name="PORT">
+        <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/Endpoints/Endpoint[@name='HttpIn']/@port" />
+      </Variable>
+      <Variable name="EMULATED">
+        <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+      </Variable>
+    </Environment>
+    <EntryPoint>
+      <ProgramEntryPoint commandLine="node.cmd .\server.js" setReadyOnProcessStart="true" />
+    </EntryPoint>
+  </Runtime>
+  <Properties>
+    <Property name="TargetFrameworkVersion" value="v3.5" />
+    <Property name="TargetRuntimeVersion" value="v2.0.50727" />
+  </Properties>
+</RoleModel>

@@ -1,10 +1,10 @@
 {
-  "name": "node-opc",
+  "name": "cspack",
   "author": {
     "name": "Microsoft Corporation"
   },
   "version": "0.5.0",
-  "description": "OPC Library",
+  "description": "CsPack Library",
   "tags": [
     "azure",
     "CLI"
@@ -13,7 +13,7 @@
     "node",
     "azure"
   ],
-  "main": "./lib/opc.js",
+  "main": "./lib/cspack.js",
   "engines": {
     "node": ">= 0.4.7"
   },
@@ -27,7 +27,8 @@
     "xml2js": "*",
     "node-js2xml": "*",
     "node-zip": "*",
-    "wrench": "*"
+    "wrench": "*",
+    "handlebars": "*"
   },
   "devDependencies": {
     "mocha": "*",
@@ -39,13 +40,5 @@
     "test": "npm -s run-script jshint && npm -s run-script unit",
     "unit": "node scripts/unit.js testlist.txt",
     "jshint": "jshint lib --jslint-reporter"
-  },
-  "readme": "node-opc\n========\n\nOpen Package Conventions Library for node.js",
-  "readmeFilename": "README.md",
-  "_id": "node-opc@0.5.0",
-  "dist": {
-    "shasum": "baa2cef1b4defba9ce921ddfe6a13ec58fff9487"
-  },
-  "_resolved": "git://github.com/andrerod/node-opc.git#69bbf15f77e45864caf54eea63c406775ce563aa",
-  "_from": "node-opc@git://github.com/andrerod/node-opc.git#dev"
+  }
 }
