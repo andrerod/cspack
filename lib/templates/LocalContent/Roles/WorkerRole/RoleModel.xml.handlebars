@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RoleModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="{{role.$.name}}" version="{{role.sdkVersion}}" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">{{#if role.Startup}}
+  <Startup>{{#role.Startup.Task}}
+    <Task{{#if $.commandLine}} commandLine="{{$.commandLine}}"{{/if}}{{#if $.executionContext}} executionContext="{{$.executionContext}}"{{/if}} relativePath="approot\"{{#if Environment}}>
+      <Environment>{{#Environment.Variable}}
+        <Variable name="{{$.name}}" {{#if $.value}}value="{{{$.value}}}"{{/if}}{{#if RoleInstanceValue}}>{{#RoleInstanceValue}}
+          <RoleInstanceValue xpath="{{{$.xpath}}}" />{{/RoleInstanceValue}}
+        </Variable>{{else}} />{{/if}}{{/Environment.Variable}}
+      </Environment>
+    </Task>{{else}} />{{/if}}{{/role.Startup.Task}}
+  </Startup>{{/if}}{{#if role.Runtime}}
+  <Runtime protocolVersion="{{role.runtimeModel.protocolVersion}}">{{#if role.Runtime.Environment}}
+    <Environment>{{#role.Runtime.Environment.Variable}}
+      <Variable name="{{$.name}}">{{#RoleInstanceValue}}
+        <RoleInstanceValue xpath="{{{$.xpath}}}" />{{/RoleInstanceValue}}
+      </Variable>{{/role.Runtime.Environment.Variable}}
+    </Environment>{{/if}}{{#if role.Runtime.EntryPoint}}
+    <EntryPoint>
+      <ProgramEntryPoint commandLine="{{role.Runtime.EntryPoint.ProgramEntryPoint.$.commandLine}}" setReadyOnProcessStart="{{role.Runtime.EntryPoint.ProgramEntryPoint.$.setReadyOnProcessStart}}" />
+    </EntryPoint>{{/if}}
+  </Runtime>{{/if}}
+  <Properties>
+    <Property name="TargetFrameworkVersion" value="{{role.runtimeModel.netFxVersion}}" />
+    <Property name="TargetRuntimeVersion" value="v2.0.50727" />
+  </Properties>
+</RoleModel>
