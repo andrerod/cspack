@@ -41,7 +41,7 @@
       <components>
         {{#workerRoles}}
         <groupHascomponents>
-          <role name="{{name}}" generation="1" functional="0" release="0" software="{{name}}_522c569b-a62a-4a58-b66b-fb489fe7a673.cssx" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe" memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="{{name}}" generation="1" functional="0" release="0" software="{{name}}_522c569b-a62a-4a58-b66b-fb489fe7a673.cssx" entryPoint="base\\x64\\WaHostBootstrapper.exe" parameters="base\\x64\\WaWorkerHost.exe" memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="HttpIn" protocol="tcp" portRanges="80" />
             </componentports>
@@ -60,21 +60,19 @@
           </sCSPolicy>
         </groupHascomponents>
         {{/workerRoles}}
-      </components>
-      {{#workerRoles}}
+      </components>{{#workerRoles}}
       <sCSPolicy>
         <sCSPolicyUpdateDomain name="{{name}}UpgradeDomains" defaultPolicy="[5,5,5]" />
         <sCSPolicyFaultDomain name="{{name}}FaultDomains" defaultPolicy="[2,2,2]" />
         <sCSPolicyID name="{{name}}Instances" defaultPolicy="[1,1,1]" />
-      </sCSPolicy>
-      {{/workerRoles}}
+      </sCSPolicy>{{/workerRoles}}
     </group>
   </groups>
   <implements>
-    <implementation Id="737464b1-fa52-41a1-8805-83cd4d0480d6" ref="Microsoft.RedDog.Contract\ServiceContract\{{serviceName}}Contract@ServiceDefinition">
+    <implementation Id="737464b1-fa52-41a1-8805-83cd4d0480d6" ref="Microsoft.RedDog.Contract\\ServiceContract\\{{serviceName}}Contract@ServiceDefinition">
       <interfacereferences>
         {{#workerRoles}}
-        <interfaceReference Id="69482b45-1c28-4737-9429-898cc3010dce" ref="Microsoft.RedDog.Contract\Interface\{{name}}:HttpIn@ServiceDefinition">
+        <interfaceReference Id="69482b45-1c28-4737-9429-898cc3010dce" ref="Microsoft.RedDog.Contract\\Interface\\{{name}}:HttpIn@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/{{serviceName}}/{{serviceName}}Group/{{name}}:HttpIn" />
           </inPort>
