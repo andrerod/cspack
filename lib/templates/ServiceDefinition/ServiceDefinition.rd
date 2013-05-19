@@ -2,46 +2,37 @@
 <serviceModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="{{serviceName}}" generation="1" functional="0" release="0" Id="93ef26d8-86db-4402-b9b3-d2801a8cdada" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="{{serviceName}}Group" generation="1" functional="0" release="0">
-      <componentports>
-        {{#workerRoles}}
+      <componentports>{{#workerRoles}}
         <inPort name="{{name}}:HttpIn" protocol="tcp">
           <inToChannel>
-            <lBChannelMoniker name="/{{serviceName}}/{{serviceName}}Group/LB:{{name}}:HttpIn" />
+            <lBChannelMoniker name="/{{../serviceName}}/{{../serviceName}}Group/LB:{{name}}:HttpIn" />
           </inToChannel>
-        </inPort>
-        {{/workerRoles}}
+        </inPort>{{/workerRoles}}
       </componentports>
-      <settings>
-        {{#workerRoles}}
+      <settings>{{#workerRoles}}
         <aCS name="{{name}}Instances" defaultValue="[1,1,1]">
           <maps>
-            <mapMoniker name="/{{serviceName}}/{{serviceName}}Group/Map{{name}}Instances" />
+            <mapMoniker name="/{{../serviceName}}/{{../serviceName}}Group/Map{{name}}Instances" />
           </maps>
-        </aCS>
-        {{/workerRoles}}
+        </aCS>{{/workerRoles}}
       </settings>
-      <channels>
-        {{#workerRoles}}
+      <channels>{{#workerRoles}}
         <lBChannel name="LB:{{name}}:HttpIn">
           <toPorts>
-            <inPortMoniker name="/{{serviceName}}/{{serviceName}}Group/{{name}}/HttpIn" />
+            <inPortMoniker name="/{{../serviceName}}/{{../serviceName}}Group/{{name}}/HttpIn" />
           </toPorts>
-        </lBChannel>
-        {{/workerRoles}}
+        </lBChannel>{{/workerRoles}}
       </channels>
-      <maps>
-        {{#workerRoles}}
+      <maps>{{#workerRoles}}
         <map name="Map{{name}}Instances" kind="Identity">
           <setting>
-            <sCSPolicyIDMoniker name="/{{serviceName}}/{{serviceName}}Group/{{name}}Instances" />
+            <sCSPolicyIDMoniker name="/{{../serviceName}}/{{../serviceName}}Group/{{name}}Instances" />
           </setting>
-        </map>
-        {{/workerRoles}}
+        </map>{{/workerRoles}}
       </maps>
-      <components>
-        {{#workerRoles}}
+      <components>{{#workerRoles}}
         <groupHascomponents>
-          <role name="{{name}}" generation="1" functional="0" release="0" software="{{name}}_522c569b-a62a-4a58-b66b-fb489fe7a673.cssx" entryPoint="base\\x64\\WaHostBootstrapper.exe" parameters="base\\x64\\WaWorkerHost.exe" memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
+          <role name="{{name}}" generation="1" functional="0" release="0" software="{{name}}_522c569b-a62a-4a58-b66b-fb489fe7a673.cssx" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaWorkerHost.exe " memIndex="1792" hostingEnvironment="consoleroleadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="HttpIn" protocol="tcp" portRanges="80" />
             </componentports>
@@ -54,12 +45,11 @@
             </resourcereferences>
           </role>
           <sCSPolicy>
-            <sCSPolicyIDMoniker name="/{{serviceName}}/{{serviceName}}Group/{{name}}Instances" />
-            <sCSPolicyUpdateDomainMoniker name="/{{serviceName}}/{{serviceName}}Group/{{name}}UpgradeDomains" />
-            <sCSPolicyFaultDomainMoniker name="/{{serviceName}}/{{serviceName}}Group/{{name}}FaultDomains" />
+            <sCSPolicyIDMoniker name="/{{../serviceName}}/{{../serviceName}}Group/{{name}}Instances" />
+            <sCSPolicyUpdateDomainMoniker name="/{{../serviceName}}/{{../serviceName}}Group/{{name}}UpgradeDomains" />
+            <sCSPolicyFaultDomainMoniker name="/{{../serviceName}}/{{../serviceName}}Group/{{name}}FaultDomains" />
           </sCSPolicy>
-        </groupHascomponents>
-        {{/workerRoles}}
+        </groupHascomponents>{{/workerRoles}}
       </components>{{#workerRoles}}
       <sCSPolicy>
         <sCSPolicyUpdateDomain name="{{name}}UpgradeDomains" defaultPolicy="[5,5,5]" />
@@ -69,15 +59,13 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="737464b1-fa52-41a1-8805-83cd4d0480d6" ref="Microsoft.RedDog.Contract\\ServiceContract\\{{serviceName}}Contract@ServiceDefinition">
-      <interfacereferences>
-        {{#workerRoles}}
-        <interfaceReference Id="69482b45-1c28-4737-9429-898cc3010dce" ref="Microsoft.RedDog.Contract\\Interface\\{{name}}:HttpIn@ServiceDefinition">
+    <implementation Id="737464b1-fa52-41a1-8805-83cd4d0480d6" ref="Microsoft.RedDog.Contract/ServiceContract/{{serviceName}}Contract@ServiceDefinition">
+      <interfacereferences>{{#workerRoles}}
+        <interfaceReference Id="69482b45-1c28-4737-9429-898cc3010dce" ref="Microsoft.RedDog.Contract/Interface/{{name}}:HttpIn@ServiceDefinition">
           <inPort>
-            <inPortMoniker name="/{{serviceName}}/{{serviceName}}Group/{{name}}:HttpIn" />
+            <inPortMoniker name="/{{../serviceName}}/{{../serviceName}}Group/{{name}}:HttpIn" />
           </inPort>
-        </interfaceReference>
-        {{/workerRoles}}
+        </interfaceReference>{{/workerRoles}}
       </interfacereferences>
     </implementation>
   </implements>
