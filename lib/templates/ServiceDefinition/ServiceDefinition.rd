@@ -59,7 +59,7 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="737464b1-fa52-41a1-8805-83cd4d0480d6" ref="Microsoft.RedDog.Contract\ServiceContract\mynewprojContract@ServiceDefinition">
+    <implementation Id="737464b1-fa52-41a1-8805-83cd4d0480d6" ref="Microsoft.RedDog.Contract\ServiceContract\mynewserviceContract@ServiceDefinition">
       <interfacereferences>{{#workerRoles}}
         <interfaceReference Id="69482b45-1c28-4737-9429-898cc3010dce" ref="Microsoft.RedDog.Contract\Interface\WorkerRole1:HttpIn@ServiceDefinition">
           <inPort>
