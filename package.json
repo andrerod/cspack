@@ -28,7 +28,8 @@
     "node-js2xml": "*",
     "node-zip": "*",
     "wrench": "*",
-    "handlebars": "*"
+    "handlebars": "*",
+    "isbinaryfile": "*"
   },
   "devDependencies": {
     "mocha": "*",
