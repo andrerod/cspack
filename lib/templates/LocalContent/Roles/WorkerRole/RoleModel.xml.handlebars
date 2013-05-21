@@ -1,31 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RoleModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="{{name}}" version="1.8.31004.1351" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
-  <Startup>
-    <Task commandLine="setup_worker.cmd &gt; log.txt" executionContext="elevated" relativePath="approot\">
-      <Environment>
-        <Variable name="EMULATED">
-          <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
-        </Variable>
-        <Variable name="RUNTIMEID" value="node" />
-        <Variable name="RUNTIMEURL" value="http://nodertncu.blob.core.windows.net/node/0.6.20.exe" />
-      </Environment>
-    </Task>
-  </Startup>
-  <Runtime protocolVersion="2011-03-08">
-    <Environment>
-      <Variable name="PORT">
-        <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/Endpoints/Endpoint[@name='HttpIn']/@port" />
-      </Variable>
-      <Variable name="EMULATED">
-        <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
-      </Variable>
-    </Environment>
+<RoleModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="{{role.$.name}}" version="{{role.sdkVersion}}" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">{{#if role.Startup}}
+  <Startup>{{#role.Startup.Task}}
+    <Task{{#if $.commandLine}} commandLine="{{$.commandLine}}"{{/if}}{{#if $.executionContext}} executionContext="{{$.executionContext}}"{{/if}} relativePath="approot\">{{#if Environment}}
+      <Environment>{{#Environment.Variable}}
+        <Variable name="{{$.name}}" {{#if $.value}}value="{{$.value}}"{{/if}}{{#if RoleInstanceValue}}>{{#RoleInstanceValue}}
+          <RoleInstanceValue xpath="{{$.xpath}}" />{{/RoleInstanceValue}}
+        </Variable>{{else}}>{{/if}}{{/Environment.Variable}}
+      </Environment>{{/if}}
+    </Task>{{/role.Startup.Task}}
+  </Startup>{{/if}}{{#if role.Runtime}}
+  <Runtime protocolVersion="{{role.runtimeModel.protocolVersion}}">{{#if role.Runtime.Environment}}
+    <Environment>{{#role.Runtime.Environment.Variable}}
+      <Variable name="{{$.name}}">{{#RoleInstanceValue}}
+        <RoleInstanceValue xpath="{{$.xpath}}" />{{/RoleInstanceValue}}
+      </Variable>{{/role.Runtime.Environment.Variable}}
+    </Environment>{{/if}}{{#if role.Runtime.EntryPoint}}
     <EntryPoint>
-      <ProgramEntryPoint commandLine="node.cmd .\server.js" setReadyOnProcessStart="true" />
-    </EntryPoint>
-  </Runtime>
+      <ProgramEntryPoint commandLine="{{role.Runtime.EntryPoint.ProgramEntryPoint.$.commandLine}}" setReadyOnProcessStart="{{role.Runtime.EntryPoint.ProgramEntryPoint.$.setReadyOnProcessStart}}" />
+    </EntryPoint>{{/if}}
+  </Runtime>{{/if}}
   <Properties>
-    <Property name="TargetFrameworkVersion" value="v3.5" />
+    <Property name="TargetFrameworkVersion" value="{{role.runtimeModel.netFxVersion}}" />
     <Property name="TargetRuntimeVersion" value="v2.0.50727" />
   </Properties>
 </RoleModel>
