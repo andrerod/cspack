@@ -25,6 +25,7 @@
   ],
   "dependencies": {
     "xml2js": "*",
+    "node-js2xml": "*",
     "node-zip": "*",
     "wrench": "*",
     "handlebars": "*",
