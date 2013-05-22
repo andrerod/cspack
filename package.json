@@ -25,7 +25,6 @@
   ],
   "dependencies": {
     "xml2js": "*",
-    "node-js2xml": "*",
     "node-zip": "*",
     "wrench": "*",
     "handlebars": "*",
@@ -41,5 +40,13 @@
     "test": "npm -s run-script jshint && npm -s run-script unit",
     "unit": "node scripts/unit.js testlist.txt",
     "jshint": "jshint lib --jslint-reporter"
-  }
+  },
+  "readme": "CsPack\n========\n\nCsPack Library for node.js",
+  "readmeFilename": "README.md",
+  "_id": "cspack@0.5.0",
+  "dist": {
+    "shasum": "99c5860f0931c960d01b73c519193b25146b5024"
+  },
+  "_resolved": "git://github.com/andrerod/cspack.git#33644b2c0c94b1c3241e3b86f28243c9539fd9cf",
+  "_from": "cspack@git://github.com/andrerod/cspack.git#master"
 }
