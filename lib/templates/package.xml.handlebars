@@ -12,7 +12,7 @@
       <ContentDescription>
         <LengthInBytes>{{ContentDescription/LengthInBytes}}</LengthInBytes>
         <IntegrityCheckHashAlgortihm>{{ContentDescription/IntegrityCheckHashAlgortihm}}</IntegrityCheckHashAlgortihm>
-        <IntegrityCheckHash/>
+        <IntegrityCheckHash{{#if ContentDescription/IntegrityCheckHash}}>{{ContentDescription/IntegrityCheckHash}}</IntegrityCheckHash>{{else}}/>{{/if}}
         <DataStorePath>{{ContentDescription/DataStorePath}}</DataStorePath>
       </ContentDescription>
     </ContentDefinition>{{/PackageContents.ContentDefinition}}
