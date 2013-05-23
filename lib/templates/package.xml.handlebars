@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageDefinition xmlns="http://schemas.microsoft.com/windowsazure" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <PackageMetaData>{{#PackageMetaData.KeyValuePair}}
+    <KeyValuePair>
+      <Key>{{Key}}</Key>
+      <Value>{{Value}}</Value>
+    </KeyValuePair>
+  </PackageMetaData>{{/PackageMetaData.KeyValuePair}}
+  <PackageContents>{{#PackageContents.ContentDefinition}}
+    <ContentDefinition>
+      <Name>{{Name}}</Name>
+      <ContentDescription>
+        <LengthInBytes>{{ContentDescription/LengthInBytes}}</LengthInBytes>
+        <IntegrityCheckHashAlgortihm>{{ContentDescription/IntegrityCheckHashAlgortihm}}</IntegrityCheckHashAlgortihm>
+        <IntegrityCheckHash{{#if ContentDescription/IntegrityCheckHash}}>{{ContentDescription/IntegrityCheckHash}}</IntegrityCheckHash>{{else}}/>{{/if}}
+        <DataStorePath>{{ContentDescription/DataStorePath}}</DataStorePath>
+      </ContentDescription>
+    </ContentDefinition>{{/PackageContents.ContentDefinition}}
+  </PackageContents>
+  <PackageLayouts>{{#PackageLayouts.LayoutDefinition}}
+    <LayoutDefinition>
+      <Name>{{Name}}</Name>
+      <LayoutDescription>{{#LayoutDescription.FileDefinition}}
+        <FileDefinition>
+          <FilePath>{{FilePath}}</FilePath>
+          <FileDescription>
+            <DataContentReference>{{FileDescription/DataContentReference}}</DataContentReference>
+            <CreatedTimeUtc>{{FileDescription/CreatedTimeUtc}}</CreatedTimeUtc>
+            <ModifiedTimeUtc>{{FileDescription/ModifiedTimeUtc}}</ModifiedTimeUtc>
+            <ReadOnly>{{FileDescription/ReadOnly}}</ReadOnly>
+          </FileDescription>
+        </FileDefinition>{{/LayoutDescription.FileDefinition}}
+      </LayoutDescription>
+    </LayoutDefinition>{{/PackageLayouts.LayoutDefinition}}
+  </PackageLayouts>
+</PackageDefinition>

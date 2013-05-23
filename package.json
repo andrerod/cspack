@@ -1,0 +1,49 @@
+{
+  "name": "cspack",
+  "author": {
+    "name": "Microsoft Corporation"
+  },
+  "version": "0.5.0",
+  "description": "xplat cspack",
+  "tags": [
+    "azure",
+    "CLI",
+    "Cloud Services",
+    "cspack"
+  ],
+  "keywords": [
+    "node",
+    "azure",
+    "Cloud Services",
+    "cspack"
+  ],
+  "engines": {
+    "node": ">= 0.6.x"
+  },
+  "licenses": [
+    {
+      "type": "Apache",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "dependencies": {
+    "underscore": "*",
+    "node-uuid": "*",
+    "node-zip": "*",
+    "wrench": "*",
+    "handlebars": "*",
+    "isbinaryfile": "*",
+    "xml2js": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "jshint": "*",
+    "sinon": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "npm -s run-script jshint && npm -s run-script unit",
+    "unit": "mocha --reporter list",
+    "jshint": "jshint lib --jslint-reporter"
+  }
+}

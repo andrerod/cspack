@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RequiredFeatures version="1.0">
+  <Feature name="NetFx35" version="0"/>
+</RequiredFeatures>
