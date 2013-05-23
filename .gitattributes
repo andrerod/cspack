@@ -1,0 +1,5 @@
+# Don't touch handlebars templates #
+*.handlebars binary
+
+# Don't touch pkg folder line endings etc #
+pkg/ binary
