@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RoleModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="{{role.$.name}}" version="{{role.sdkVersion}}" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">{{#if role.Startup}}
-  <Startup>{{#role.Startup.Task}}
-    <Task{{#if $.commandLine}} commandLine="{{$.commandLine}}"{{/if}}{{#if $.executionContext}} executionContext="{{$.executionContext}}"{{/if}} relativePath="approot\"{{#if Environment}}>
+  <Startup>{{#if WebRole}}
+    <Task commandLine="IISConfigurator.exe" executionContext="elevated" relativePath="base\x64">
+      <Environment>
+        <Variable name="_IISCONFIGURATOR_SETUP_URL_REWRITE_" value="true" />
+        <Variable name="_IISCONFIGURATOR_CLEAN_SERVER_ONSTARTUP_" value="true" />
+        <Variable name="RdModuleName" value="IISConfigurator" />
+      </Environment>
+    </Task>{{/if}}{{#role.Startup.Task}}
+    <Task{{#if $.commandLine}} commandLine="{{$.commandLine}}"{{/if}}{{#if $.executionContext}} executionContext="{{$.executionContext}}"{{/if}} {{#if ../../role.WebRole}}relativePath="approot\bin"{{else}}relativePath="approot\"{{/if}}{{#if Environment}}>
       <Environment>{{#Environment.Variable}}
         <Variable name="{{$.name}}" {{#if $.value}}value="{{{$.value}}}"{{/if}}{{#if RoleInstanceValue}}>{{#RoleInstanceValue}}
           <RoleInstanceValue xpath="{{{$.xpath}}}" />{{/RoleInstanceValue}}
@@ -22,5 +29,12 @@
   <Properties>
     <Property name="TargetFrameworkVersion" value="{{role.runtimeModel.netFxVersion}}" />
     <Property name="TargetRuntimeVersion" value="v2.0.50727" />
-  </Properties>
+  </Properties>{{#if role.Sites}}
+  <Sites>{{#role.Sites}}
+    <Site name="{{$.name}}" physicalDirectory="approot">
+      <Bindings>{{#Bindings.Binding}}
+        <Binding name="{{$.name}}" endpointName="{{$.endpointName}}" />
+      </Bindings>{{/Bindings.Binding}}
+    </Site>{{/role.Sites}}
+  </Sites>{{/if}}
 </RoleModel>

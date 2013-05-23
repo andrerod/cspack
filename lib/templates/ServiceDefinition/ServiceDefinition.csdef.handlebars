@@ -9,5 +9,15 @@
       <InputEndpoint name="HttpIn" protocol="tcp" port="80" localPort="80" />
     </Endpoints>
     <Certificates />
-  </WorkerRole>{{/WorkerRole}}
+  </WorkerRole>{{/WorkerRole}}{{#WebRole}}
+  <WebRole name="{{$.name}}">
+    <LocalResources>
+      <LocalStorage name="DiagnosticStore" sizeInMB="4096" cleanOnRoleRecycle="false" />
+    </LocalResources>
+    <ConfigurationSettings />
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="8080" localPort="8080" />
+    </Endpoints>
+    <Certificates />
+  </WebRole>{{/WebRole}}
 </ServiceDefinition>
