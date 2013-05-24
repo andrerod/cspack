@@ -1,0 +1,145 @@
+{
+  "sdkVersion": "1.8.31004.1351",
+  "files": [
+    {
+        "name": "base/Microsoft.WindowsAzure.ServiceRuntime.config"
+    },
+    {
+        "name": "base/Microsoft.WindowsAzure.ServiceRuntime.dll"
+    },
+    {
+        "name": "base/policy.1.0.Microsoft.WindowsAzure.ServiceRuntime.dll"
+    }
+    {
+        "name": "base/x64/Diagnostics.dll"
+    }
+    {
+        "name": "base/x64/IISConfigurator.exe"
+    },
+    {
+        "name": "base/x64/Microsoft.WindowsAzure.Internal.RuntimeServer.dll"
+    },
+    {
+        "linksTo": "base/Microsoft.WindowsAzure.ServiceRuntime.dll",
+        "name": "base/x64/Microsoft.WindowsAzure.ServiceRuntime.dll"
+    },
+    {
+        "name": "base/x64/msshrtmi.dll"
+    },
+    {
+        "name": "base/x64/mswasr.dll"
+    },
+    {
+        "name": "base/x64/mswasri.dll"
+    },
+    {
+        "base/x64/WaHostBootstrapper.exe"
+    },
+    {
+        "name": "base/x64/WaHostBootstrapper.exe.config"
+    },
+    {
+        "name": "base/x64/WaIISHost.exe"
+    },
+    {
+        "name": "base/x64/WaRuntimeProxy.dll"
+    },
+    {
+        "name": "base/x64/WaWebHost.exe"
+    },
+    {
+        "name": "base/x64/WaWorkerHost.exe"
+    },
+    {
+        "name": "base/x86/Diagnostics.dll"
+    },
+    {
+        "name": "base/x86/IISConfigurator.exe'"
+    },
+    {
+        "name": "base/x86/Microsoft.WindowsAzure.Internal.RuntimeServer.dll"
+    },
+    {
+        "name": "base/x86/Microsoft.WindowsAzure.ServiceRuntime.dll"
+    },
+    {
+        "name": "base/x86/msshrtmi.dll"
+    },
+    {
+        "name": "base/x86/mswasr.dll"
+    },
+    {
+        "name": "base/x86/mswasri.dll"
+    },
+    {
+        "name": "base/x86/WaHostBootstrapper.exe"
+    },
+    {
+      "linksTo": "base/x64/WaHostBootstrapper.exe.config",
+      "name": "base/x86/WaHostBootstrapper.exe.config"
+    },
+    {
+        "name": "base/x86/WaIISHost.exe"
+    },
+    {
+        "name": "base/x86/WaRuntimeProxy.dll"
+    },
+    {
+        "name": "base/x86/WaWebHost.exe"
+    },
+    {
+        "name": "base/x86/WaWorkerHost.exe"
+    },
+    {
+        "name": "diagnostics/x64/monitor/FileListener.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/MonAgent.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/MonAgentHost.exe"
+    },
+    {
+        "name": "diagnostics/x64/monitor/MonConfig.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/MonDiagnostics.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/MonEvents.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/MonNetTransport.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/MonQuery.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/MonTables.dll"
+    }
+    {
+        "name": "diagnostics/x64/monitor/secutil.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/SysCounterListener.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/SystemEventsListener.dll"
+    },
+    {
+        "name": "diagnostics/x64/monitor/schema/1.0/ma.xsd"
+    },
+    {
+        "name": "diagnostics/x64/monitor/schema/1.0/maStatic.xsd"
+    },
+    {
+        "name": "diagnostics/x64/monitor/schema/1.0/query.xsd"
+    },
+    {
+        "name": "diagnostics/x64/monitor/schema/1.0/shared.xsd"
+    },
+    {
+        "name": "storage/cloud/x64/mswacdmi.dll"
+    }
+  ]
+}

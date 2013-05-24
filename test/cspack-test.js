@@ -13,26 +13,26 @@
 * limitations under the License.
 */
 
-var _ = require('underscore');
+var should = require('should');
 
-_.extend(exports, {
-  PackagePaths: {
-    LocalContent: 'LocalContent',
-    NamedStreams: 'NamedStreams',
-    ServiceDefinition: 'ServiceDefinition',
-    PackageManifest: 'package.xml'
-  },
+var CsPack = require('../lib/cspack');
 
-  TemplatePaths: {
-    PackageManifest: 'package.xml.handlebars'
-  },
+describe('cspack', function () {
+  describe('fetch sdk package', function () {
+    var subject;
 
-  IntegrityCheckHashAlgortihms: {
-    Sha256: 'Sha256'
-  },
+    beforeEach(function (done) {
+      subject = new CsPack({ outputDirectory: '/Users/andrerod/workspace/scaffold/' });
 
-  DefaultSDKLocation: {
-    manifest: 'https://raw.github.com/andrerod/cspack/dev2/lib/pkg/sdk.json',
-    bits: 'https://raw.github.com/andrerod/cspack/dev2/lib/pkg/sdk.zip'
-  }
+      done();
+    });
+
+    it('should work', function (done) {
+      subject.fetchBasePackage(function (err) {
+        should.not.exist(err);
+
+        done();
+      });
+    });
+  });
 });

@@ -14,18 +14,15 @@
 */
 
 var path = require('path');
-var fs = require('fs');
 
 var should = require('should');
 
 var constants = require('../lib/util/constants');
 
 var Package = require('../lib/package');
-var FileDataStore = require('../lib/filedatastore');
+var ZipDataStore = require('../lib/store/zipdatastore');
 var HandlebarsView = require('../lib/handlebarsview');
 var utils = require('../lib/util/utils');
-
-var TEMPORARY_PACKAGE_PATH = path.join(__dirname, 'package');
 
 describe('package', function(){
   var subject;
@@ -33,14 +30,10 @@ describe('package', function(){
   beforeEach(function (done) {
     subject = new Package({
       productVersion: '1.8.31004.1351',
-      dataStore: new FileDataStore({temporaryPackagePath: TEMPORARY_PACKAGE_PATH }),
+      dataStore: new ZipDataStore(),
       viewEngine: new HandlebarsView({ templateFilePath: path.join(__dirname, '../lib/templates/', constants.TemplatePaths.PackageManifest) })
     });
     done();
-  });
-
-  afterEach(function (done) {
-    utils.rmDirRecursive(TEMPORARY_PACKAGE_PATH, done);
   });
 
   describe('content definition', function() {
@@ -49,7 +42,7 @@ describe('package', function(){
         var contentName = 'mycontent';
         var fixtureFullPath = path.join(__dirname, 'fixtures/NamedStreams/RequiredFeatures/WorkerRole/1.0');
 
-        subject.addContentDefinition('NamedStreams', contentName, fixtureFullPath, function (err, contentDefinition) {
+        subject.addContentDefinition('NamedStreams', contentName, { filePath: fixtureFullPath }, function (err, contentDefinition) {
           should.not.exist(err);
           should.exist(contentDefinition);
           contentDefinition.Name.should.equal(subject.normalizeContentName(path.join('NamedStreams', contentName)));
@@ -63,7 +56,7 @@ describe('package', function(){
 
       beforeEach(function (done) {
         var fixtureFullPath = path.join(__dirname, 'fixtures/NamedStreams/RequiredFeatures/WorkerRole/1.0');
-        subject.addContentDefinition('NamedStreams', contentName, fixtureFullPath, done);
+        subject.addContentDefinition('NamedStreams', contentName, { filePath: fixtureFullPath }, done);
       });
 
       it ('should return null if it does not exist', function (done) {
@@ -99,7 +92,7 @@ describe('package', function(){
 
       beforeEach(function (done) {
         var fixtureFullPath = path.join(__dirname, 'fixtures/NamedStreams/RequiredFeatures/WorkerRole/1.0');
-        subject.addFileDefinition(layoutName, contentName, fixtureFullPath, done);
+        subject.addFileDefinition(layoutName, contentName, { filePath: fixtureFullPath }, done);
       });
 
       it ('should throw if the layout does not exist', function (done) {
@@ -179,14 +172,14 @@ describe('package', function(){
     before(function (done) {
       var fixtureFullPath = path.join(__dirname, 'fixtures/NamedStreams/RequiredFeatures/WorkerRole/1.0');
       subject.addLayoutDefinition(layoutName, function () {
-        subject.addFileDefinition(layoutName, contentName, fixtureFullPath, done);
+        subject.addFileDefinition(layoutName, contentName, { filePath: fixtureFullPath }, done);
       });
     });
 
     it('should work', function (done) {
       var fixtureFullPath = path.join(__dirname, 'fixtures/NamedStreams/RequiredFeatures/WorkerRole/1.0');
       subject.addLayoutDefinition(layoutName, function () {
-        subject.addFileDefinition(layoutName, contentName, fixtureFullPath, function () {
+        subject.addFileDefinition(layoutName, contentName, { filePath: fixtureFullPath }, function () {
           subject.generateManifest(function (err) {
             should.not.exist(err);
 
