@@ -27,6 +27,7 @@
     }
   ],
   "dependencies": {
+    "async": "*",
     "underscore": "*",
     "node-uuid": "*",
     "node-zip": "*",
@@ -43,7 +44,7 @@
   },
   "scripts": {
     "test": "npm -s run-script jshint && npm -s run-script unit",
-    "unit": "mocha --reporter list",
+    "unit": "mocha --reporter list -t 50000",
     "jshint": "jshint lib --jslint-reporter"
   }
 }

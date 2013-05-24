@@ -20,11 +20,9 @@ var should = require('should');
 var constants = require('../lib/util/constants');
 
 var HashedPackage = require('../lib/hashedpackage');
-var FileDataStore = require('../lib/filedatastore');
+var ZipDataStore = require('../lib/store/zipdatastore');
 var HandlebarsView = require('../lib/handlebarsview');
 var utils = require('../lib/util/utils');
-
-var TEMPORARY_PACKAGE_PATH = path.join(__dirname, 'package');
 
 describe('hashedpackage', function(){
   var subject;
@@ -32,14 +30,10 @@ describe('hashedpackage', function(){
   beforeEach(function (done) {
     subject = new HashedPackage({
       productVersion: '1.8.31004.1351',
-      dataStore: new FileDataStore({temporaryPackagePath: TEMPORARY_PACKAGE_PATH }),
+      dataStore: new ZipDataStore(),
       viewEngine: new HandlebarsView({ templateFilePath: path.join(__dirname, '../lib/templates/', constants.TemplatePaths.PackageManifest) })
     });
     done();
-  });
-
-  afterEach(function (done) {
-    utils.rmDirRecursive(TEMPORARY_PACKAGE_PATH, done);
   });
 
   describe('content definition', function() {
@@ -49,7 +43,7 @@ describe('hashedpackage', function(){
       var fixtureFullPath = path.join(__dirname, 'fixtures/NamedStreams/RequiredFeatures/WorkerRole/1.0');
 
       it('should work', function (done) {
-        subject.addContentDefinition('LocalContent', contentName1, fixtureFullPath, function (err, contentDefinition) {
+        subject.addContentDefinition('LocalContent', contentName1, { filePath: fixtureFullPath }, function (err, contentDefinition) {
           should.not.exist(err);
           should.exist(contentDefinition);
           contentDefinition.Name.should.equal(subject.normalizeContentName(path.join('LocalContent', contentName1)));
@@ -59,12 +53,12 @@ describe('hashedpackage', function(){
       });
 
       it('should reuse a content if available', function (done) {
-        subject.addContentDefinition('LocalContent', contentName1, fixtureFullPath, function (err1, contentDefinition1) {
+        subject.addContentDefinition('LocalContent', contentName1, { filePath: fixtureFullPath }, function (err1, contentDefinition1) {
           should.not.exist(err1);
           should.exist(contentDefinition1);
           contentDefinition1.Name.should.equal(subject.normalizeContentName(path.join('LocalContent', contentName1)));
 
-          subject.addContentDefinition('LocalContent', contentName2, fixtureFullPath, function (err2, contentDefinition2) {
+          subject.addContentDefinition('LocalContent', contentName2, { filePath: fixtureFullPath }, function (err2, contentDefinition2) {
             should.not.exist(err2);
             should.exist(contentDefinition2);
 
