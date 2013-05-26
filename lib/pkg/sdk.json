@@ -33,7 +33,7 @@
         "name": "base/x64/mswasri.dll"
     },
     {
-        "base/x64/WaHostBootstrapper.exe"
+        "name": "base/x64/WaHostBootstrapper.exe"
     },
     {
         "name": "base/x64/WaHostBootstrapper.exe.config"
