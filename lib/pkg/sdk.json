@@ -9,10 +9,10 @@
     },
     {
         "name": "base/policy.1.0.Microsoft.WindowsAzure.ServiceRuntime.dll"
-    }
+    },
     {
         "name": "base/x64/Diagnostics.dll"
-    }
+    },
     {
         "name": "base/x64/IISConfigurator.exe"
     },
@@ -116,7 +116,7 @@
     },
     {
         "name": "diagnostics/x64/monitor/MonTables.dll"
-    }
+    },
     {
         "name": "diagnostics/x64/monitor/secutil.dll"
     },
