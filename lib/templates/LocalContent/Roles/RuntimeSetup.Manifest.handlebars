@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuntimeSetup>
+  <Operation type="Gac" path="base\x64\msshrtmi.dll" />
+  <Operation type="Gac" path="base\x86\msshrtmi.dll" />
+  <Operation type="Gac" path="base\Microsoft.WindowsAzure.ServiceRuntime.dll" />
+  <Operation type="Gac" path="base\policy.1.0.Microsoft.WindowsAzure.ServiceRuntime.dll" />
+  <Operation type="Gac" path="storage\cloud\x64\mswacdmi.dll" />
+  <Operation type="Path" path="base\x64" />
+  <Operation type="Path" path="base\x86" />
+  <Operation type="Path" path="diagnostics\x64" />{{#if role.WebRole}}
+  <AdditionalRoleIdentities>
+    <Identity username="NetworkService" domain="NT AUTHORITY" />
+  </AdditionalRoleIdentities>{{/if}}
+</RuntimeSetup>

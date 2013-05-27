@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<serviceContract xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" dslVersion="1.0.0.0" name="{{$.name}}Contract" xmlns="http://schemas.microsoft.com/dsltools/Contracts">
+  <elements>{{#WebRole}}
+    <interface name="{{$.name}}:Endpoint1" url="http://*:8080" />{{/WebRole}}{{#WorkerRole}}
+    <interface name="{{$.name}}:HttpIn" url="tcp://*:80" />{{/WorkerRole}}
+  </elements>
+</serviceContract>

@@ -17,6 +17,7 @@
     "Cloud Services",
     "cspack"
   ],
+  "main": "./lib/cspack.js",
   "engines": {
     "node": ">= 0.6.x"
   },

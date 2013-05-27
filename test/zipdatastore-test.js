@@ -28,17 +28,17 @@ describe('zipdatastore', function() {
     done();
   });
 
-  describe('addContentFromString', function () {
+  describe('addContentFromBuffer', function () {
     it('should work', function (done) {
       var contentName = 'manifest.json';
       var content = '{ "sdkVersion": "1.8.31004.1351" }';
 
-      subject.addContentFromString(contentName, content, function (err) {
+      subject.addContentFromBuffer(contentName, content, function (err) {
         should.not.exist(err);
 
         subject.getContent(contentName, function (err, actualContent) {
           should.not.exist(err);
-          actualContent.should.equal(content);
+          actualContent.toString().should.equal(content);
 
           done();
         });
@@ -64,7 +64,7 @@ describe('zipdatastore', function() {
       subject.addContentFromFile(contentName, filePath, function () {
         subject.getContent(contentName, function (err, actualContent) {
           should.not.exist(err);
-          actualContent.should.equal(content);
+          actualContent.toString().should.equal(content);
 
           done();
         });
@@ -79,8 +79,8 @@ describe('zipdatastore', function() {
     var content = '{ "sdkVersion": "1.8.31004.1351" }';
 
     beforeEach(function (done) {
-      subject.addContentFromString(contentName, content, function () {
-        subject.addContentFromString(contentName2, content, done);
+      subject.addContentFromBuffer(contentName, content, function () {
+        subject.addContentFromBuffer(contentName2, content, done);
       });
     });
 

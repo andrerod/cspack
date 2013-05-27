@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<ServiceDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="mynewservice" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+  <WebRole name="WebRole1" vmsize="ExtraSmall">
+    <Imports />
+    <Startup>
+      <Task commandLine="setup_web.cmd &gt; log.txt" executionContext="elevated">
+        <Environment>
+          <Variable name="EMULATED">
+            <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+          </Variable>
+          <Variable name="RUNTIMEID" value="node;iisnode" />
+          <Variable name="RUNTIMEURL" value="" />
+        </Environment>
+      </Task>
+    </Startup>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="8080" />
+    </Endpoints>
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+        </Bindings>
+      </Site>
+    </Sites>
+  </WebRole>
+  <WorkerRole name="WorkerRole1">
+    <Startup>
+      <Task commandLine="setup_worker.cmd &gt; log.txt" executionContext="elevated">
+        <Environment>
+          <Variable name="EMULATED">
+            <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+          </Variable>
+          <Variable name="RUNTIMEID" value="node" />
+          <Variable name="RUNTIMEURL" value="" />
+        </Environment>
+      </Task>
+      <Task commandLine="node.cmd .\startup.js" executionContext="elevated" />
+    </Startup>
+    <Endpoints>
+      <InputEndpoint name="HttpIn" protocol="tcp" port="80" />
+    </Endpoints>
+    <Runtime>
+      <Environment>
+        <Variable name="PORT">
+          <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/Endpoints/Endpoint[@name='HttpIn']/@port" />
+        </Variable>
+        <Variable name="EMULATED">
+          <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+        </Variable>
+      </Environment>
+      <EntryPoint>
+        <ProgramEntryPoint commandLine="node.cmd .\server.js" setReadyOnProcessStart="true" />
+      </EntryPoint>
+    </Runtime>
+  </WorkerRole>
+</ServiceDefinition>
