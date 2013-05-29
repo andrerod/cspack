@@ -87,7 +87,7 @@ describe('cspack', function() {
 
             dataContent.ContentDescription.LengthInBytes.should.equal('268');
             dataContent.ContentDescription.IntegrityCheckHash.should.equal('7px+7sHj+QGNXgFEma367q0Tv/0BAmFGY1khm4CtvCs=');
-            dataContent.ContentDescription.IntegrityCheckHashAlgortihm.should.equal('sha256');
+            dataContent.ContentDescription.IntegrityCheckHashAlgortihm.should.equal('Sha256');
 
             zipDataStore.getContent(configFile.FileDescription.DataContentReference, function (err, content) {
               should.not.exist(err);
