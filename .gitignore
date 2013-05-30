@@ -20,3 +20,6 @@ Thumbs.db
 
 # WebStorm #
 .idea/
+
+# generated cspkg files #
+*.cspkg

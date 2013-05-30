@@ -24,14 +24,14 @@ var ZipDataStore = require('../lib/store/zipdatastore');
 var HandlebarsView = require('../lib/handlebarsview');
 var utils = require('../lib/util/utils');
 
-describe('package', function(){
+describe('package', function() {
   var subject;
 
   beforeEach(function (done) {
     subject = new Package({
       productVersion: '1.8.31004.1351',
       dataStore: new ZipDataStore(),
-      viewEngine: new HandlebarsView({ templateFilePath: path.join(__dirname, '../lib/templates/', constants.TemplatePaths.PackageManifest) })
+      viewEngine: new HandlebarsView()
     });
     done();
   });
@@ -180,13 +180,13 @@ describe('package', function(){
       var fixtureFullPath = path.join(__dirname, 'fixtures/NamedStreams/RequiredFeatures/WorkerRole/1.0');
       subject.addLayoutDefinition(layoutName, function () {
         subject.addFileDefinition(layoutName, contentName, { filePath: fixtureFullPath }, function () {
-          subject.generateManifest(function (err) {
+          subject.save(function (err) {
             should.not.exist(err);
 
             subject.dataStore.getContent(constants.PackagePaths.PackageManifest, function (err, manifest) {
               should.not.exist(err);
 
-              utils.parseXml(manifest, function (err, parsedXml) {
+              utils.parseXmlString(manifest, function (err, parsedXml) {
                 should.not.exist(err);
 
                 should.exist(parsedXml.PackageDefinition);

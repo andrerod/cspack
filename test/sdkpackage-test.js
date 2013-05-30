@@ -54,7 +54,7 @@ describe('sdkpackage', function() {
 
         files.length.should.be.above(0);
 
-        subject.getFile(files[0], function (err, data) {
+        subject.getFile(files[0].name, function (err, data) {
           should.not.exist(err);
           should.exist(data);
 

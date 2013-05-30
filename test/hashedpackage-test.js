@@ -24,7 +24,7 @@ var ZipDataStore = require('../lib/store/zipdatastore');
 var HandlebarsView = require('../lib/handlebarsview');
 var utils = require('../lib/util/utils');
 
-describe('hashedpackage', function(){
+describe('hashedpackage', function() {
   var subject;
 
   beforeEach(function (done) {
