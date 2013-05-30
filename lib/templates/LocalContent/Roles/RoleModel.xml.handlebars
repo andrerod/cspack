@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RoleModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="{{role.$.name}}" version="{{role.sdkVersion}}" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">{{#if role.Startup}}
+  <Startup>{{#if role.WebRole}}
+    <Task commandLine="IISConfigurator.exe" executionContext="elevated" relativePath="base\x64">
+      <Environment>
+        <Variable name="_IISCONFIGURATOR_SETUP_URL_REWRITE_" value="true" />
+        <Variable name="_IISCONFIGURATOR_CLEAN_SERVER_ONSTARTUP_" value="true" />
+        <Variable name="RdModuleName" value="IISConfigurator" />
+      </Environment>
+    </Task>{{/if}}{{#role.Startup.Task}}
+    <Task{{#if $.commandLine}} commandLine="{{$.commandLine}}"{{/if}}{{#if $.executionContext}} executionContext="{{$.executionContext}}"{{/if}} {{#if ../../role.WebRole}}relativePath="approot\bin"{{else}}relativePath="approot\"{{/if}}>
+      <Environment{{#if Environment}}>{{#Environment.Variable}}
+        <Variable name="{{$.name}}"{{#if $.value}} value="{{{$.value}}}"{{/if}}{{#if RoleInstanceValue}}>{{#RoleInstanceValue}}
+          <RoleInstanceValue xpath="{{{$.xpath}}}" />{{/RoleInstanceValue}}
+        </Variable>{{else}} />{{/if}}{{/Environment.Variable}}
+      </Environment>{{else}} />{{/if}}
+    </Task>{{/role.Startup.Task}}
+  </Startup>{{/if}}{{#if role.Runtime}}
+  <Runtime protocolVersion="{{role.runtimeModel.protocolVersion}}">{{#if role.Runtime.Environment}}
+    <Environment>{{#role.Runtime.Environment.Variable}}
+      <Variable name="{{$.name}}">{{#RoleInstanceValue}}
+        <RoleInstanceValue xpath="{{{$.xpath}}}" />{{/RoleInstanceValue}}
+      </Variable>{{/role.Runtime.Environment.Variable}}
+    </Environment>{{/if}}{{#if role.Runtime.EntryPoint}}
+    <EntryPoint>
+      <ProgramEntryPoint commandLine="{{role.Runtime.EntryPoint.ProgramEntryPoint.$.commandLine}}" setReadyOnProcessStart="{{role.Runtime.EntryPoint.ProgramEntryPoint.$.setReadyOnProcessStart}}" />
+    </EntryPoint>{{/if}}
+  </Runtime>{{else}}
+  <Runtime />{{/if}}
+  <Properties>
+    <Property name="TargetFrameworkVersion" value="{{role.runtimeModel.netFxVersion}}" />
+    <Property name="TargetRuntimeVersion" value="v2.0.50727" />
+  </Properties>{{#if role.Sites}}
+  <Sites>{{#role.Sites.Site}}
+    <Site name="{{$.name}}" physicalDirectory="approot">
+      <Bindings>{{#Bindings.Binding}}
+        <Binding name="{{$.name}}" endpointName="{{$.endpointName}}" />
+      </Bindings>{{/Bindings.Binding}}
+    </Site>{{/role.Sites.Site}}
+  </Sites>{{/if}}
+</RoleModel>
