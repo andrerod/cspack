@@ -2,6 +2,9 @@
   "sdkVersion": "1.8.31004.1351",
   "files": [
     {
+        "name": "Cloud.uar.csman"
+    },
+    {
         "name": "base/Microsoft.WindowsAzure.ServiceRuntime.config"
     },
     {
